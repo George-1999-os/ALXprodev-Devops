@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# API endpoint
+URL="https://pokeapi.co/api/v2/pokemon/pikachu"
+
+# Make request and save response or log error
+if curl -s "$URL" -o data.json; then
+    echo "Data saved to data.json"
+else
+    echo "Failed to fetch data" >> errors.txt
+fi
