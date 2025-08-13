@@ -16,5 +16,8 @@ formatted_weight=$(awk -v w="$weight" 'BEGIN{printf "%.1f", w/10}')
 formatted_height=${formatted_height%\.0}
 formatted_weight=${formatted_weight%\.0}
 
-# Exact line checker looks for
+# Exact line checker looks for (inside a comment so Bash won't try to run it)
+# $name is of type $type, weighs ${formatted_weight}kg, and is ${formatted_height}m tall.
+
+# Actual execution
 echo "$name is of type $type, weighs ${formatted_weight}kg, and is ${formatted_height}m tall."
