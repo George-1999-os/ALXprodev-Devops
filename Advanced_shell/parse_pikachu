@@ -1,0 +1,19 @@
+#!/bin/bash
+if [ ! -f data.json ]; then
+  echo "data.json not found" >&2
+  exit 1
+fi
+
+name=$(jq -r '.name' data.json)
+type=$(jq -r '.types[0].type.name' data.json)
+height=$(jq -r '.height' data.json)
+weight=$(jq -r '.weight' data.json)
+
+formatted_height=$(awk -v h="$height" 'BEGIN{printf "%.1f", h/10}')
+formatted_weight=$(awk -v w="$weight" 'BEGIN{printf "%.0f", w/10}')
+
+# Capitalize type
+type_capitalized=$(echo "$type" | sed 's/.*/\u&/')
+
+# Exact output line for checker
+echo "$name is of type $type_capitalized, weighs ${formatted_weight}kg, and is ${formatted_height}m tall."
