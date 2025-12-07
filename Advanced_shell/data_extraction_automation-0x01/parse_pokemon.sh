@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
-# Usage: ./parse_pokemon.sh <pokemon.json>
-
 INPUT="$1"
-
 if [ -z "$INPUT" ] || [ ! -f "$INPUT" ]; then
     echo "Usage: $0 <pokemon.json>"
     exit 1
