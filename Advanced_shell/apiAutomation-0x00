@@ -1,11 +1,20 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# apiAutomation-0x00
+# Fetch Pikachu data from Pokémon API
 
-# API endpoint
 URL="https://pokeapi.co/api/v2/pokemon/pikachu"
+OUTPUT="data.json"
+ERROR="errors.txt"
 
-# Make request and save response or log error
-if curl -s "$URL" -o data.json; then
-    echo "Data saved to data.json"
-else
-    echo "Failed to fetch data" >> errors.txt
+# Make API request and capture HTTP status
+HTTP_RESPONSE=$(curl -s -w "%{http_code}" -o "$OUTPUT" "$URL")
+
+# Check HTTP status code
+if [ "$HTTP_RESPONSE" -ne 200 ]; then
+    echo "Failed to fetch data" > "$ERROR"
+    rm -f "$OUTPUT"
+    exit 1
 fi
+
+# Success
+echo "Data fetched successfully"
