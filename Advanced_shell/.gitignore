@@ -1,0 +1,5 @@
+# Ignore swap/backup files
+*.swp
+*.bak
+errors.txt
+data.json
